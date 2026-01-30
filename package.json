@@ -7,18 +7,20 @@
   "license": "GPLv3",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . classSchedule --platform=win32 --arch=x64 --out=./out --app-version=0.0.1 --overwrite"
+    "build": "electron-packager . classSchedule --platform=win32 --arch=x64 --out=./out --app-version=0.0.1 --overwrite",
+    "build-linux": "electron-packager . classSchedule --platform=linux --arch=x64 --out=./out --app-version=0.0.1 --overwrite"
   },
   "devDependencies": {
     "@electron/rebuild": "^3.6.0",
+    "electron": "^29.1.5",
     "electron-packager": "^17.1.2"
   },
   "dependencies": {
-    "electron": "^29.1.5",
     "electron-disable-minimize": "^2.1.0",
     "electron-prompt": "^1.7.0",
     "electron-store": "^8.1.0",
     "node-gyp": "^10.0.1",
-    "windows-shortcuts": "^0.1.6"
+    "windows-shortcuts": "^0.1.6",
+    "yauzl": "^3.2.0"
   }
 }

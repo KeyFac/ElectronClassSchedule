@@ -6,15 +6,14 @@ const _scheduleConfig = {
     // 倒计时目标：位于右侧框中的倒计时，输入日期即可，可以是中考高考期末等等，格式YYYY-MM-DD
     // 若想隐藏右侧的倒计时，请在下方冒号后填入'hidden', (包括引号)
     countdown_target: '2026-6-7',
-    //countdown_target: 'hidden', //7-6
 
     // 星期显示：左侧框是否显示，显示为true，隐藏为false
     // 直接将true或false填入冒号后边，没有引号
-    week_display: true,
+    week_display: false,
 
     // 科目名称：所有课程科目的简写及其对应全称，冒号前面(key)为简写，后面(value)为全称，不限字数，
     // 若存在多个课程简写相同，需要加以区分，可以为简写添加下角标，使用@分隔，如'自@语'，@前为简写，@后为下角标
-    // 要求必须做到覆盖完全，否则可能会保错
+    // 要求必须做到覆盖完全，否则可能会报错
     subject_name: {
         '自@语': '语文自习',
         '自@数': '数学自习',
@@ -136,7 +135,6 @@ const _scheduleConfig = {
 			'20:30-20:39': '课间',
 			'20:40-21:49': 2, 
 			'21:50-23:59': '放学', 
-			
 		}, 
     },
 
@@ -216,6 +214,7 @@ const _scheduleConfig = {
         '--divider-margin': '6px', // 分隔线外边距
         '--triangle-size': '10px', // 倒计时框上方小三角箭头的大小
         '--sub-font-size': '20px', // 中间课表中的课程下角标(X@X)的字体大小
+        '--timer-close-font-size': '24px', // 倒计时关闭按钮的大小
     }
 }
 
