@@ -1,10 +1,11 @@
-const { ipcMain, BrowserWindow } = require('electron')
+const { ipcMain, BrowserWindow, dialog } = require('electron')
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const yauzl = require('yauzl');
 
-const { configs } = require('./config')
+const { configs } = require('./config');
+const { electron } = require('process');
 
 const endpoint = "https://api.github.com/"
 const repo = "aawwaaa/ElectronClassSchedule2"
@@ -32,13 +33,24 @@ let latestData = {}
 let latestMeta = {}
 let latestVersion = ""
 exports.checkUpdate = async () => {
+  try {
     let res = await fetch(releaseURL)
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
     latestData = await res.json()
     latestMeta = JSON.parse(latestData.body.split(metaBegin)[1].trim())
     latestVersion = latestMeta.version
     if (latestVersion != exports.currentVersion){
         store.set("update.hasUpdate", true)
     }
+    // 处理更新逻辑
+    console.log('Current version:', data.version);
+  } catch (error) {
+    console.error('Failed to check for updates:', error.message);
+    dialog.showErrorBox("检查更新失败", "无法连接到更新服务器，请检查网络连接。");
+    // 可选：显示用户友好的提示（如使用 Electron dialog）
+  }
 }
 
 let win = void 0
@@ -99,13 +111,13 @@ ipcMain.handle('about.downloadUpdate', async () => {
         }
         
         updateStatus("下载中... ")
-        let response = await fetch(url)
+        let res = await fetch(url)
         // 获取文件总大小
-        const contentLength = response.headers.get('content-length');
+        const contentLength = res.headers.get('content-length');
         const totalSize = parseInt(contentLength, 10);
 
         let downloadedSize = 0;
-        const reader = response.body.getReader();
+        const reader = res.body.getReader();
 
         const fileName = path.join(os.tmpdir(), `update-${Date.now()}.zip`);
         const writer = fs.createWriteStream(fileName);
