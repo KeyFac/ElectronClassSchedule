@@ -38,14 +38,13 @@ const createWindow = () => {
         },
     })
     // win.webContents.openDevTools()
-    //useDebug();
-    store.set('isWindowAlwaysOnTop', false)
-
+    //let alwaysOnTop = false,
     win.loadFile('index.html')
-    /*
+    //store.set('isWindowAlwaysOnTop', e.checked)
+    store.set('isWindowAlwaysOnTop', false)
     if (store.get('isWindowAlwaysOnTop', true))
         win.setAlwaysOnTop(true, 'screen-saver', 9999999999999)
-    */
+    store.set('isWindowAlwaysOnTop', false)
 }
 function setAutoLaunch() {
     const shortcutName = '电子课表(请勿重命名).lnk'
@@ -72,7 +71,7 @@ app.whenReady().then(() => {
     })
     const handle = win.getNativeWindowHandle();
     DisableMinimize(handle); // Thank to peter's project https://github.com/tbvjaos510/electron-disable-minimize
-    setAutoLaunch();
+    setAutoLaunch()
 })
 
 ipcMain.on('getWeekIndex', (e, arg) => {
@@ -99,13 +98,6 @@ ipcMain.on('getWeekIndex', (e, arg) => {
                 win.webContents.send('setWeekIndex', 2)
             }
         },
-        /*{
-            label: '第四周',
-            type: 'radio',
-            click: () => {
-                win.webContents.send('setWeekIndex', 3)
-            }
-        },*/
         {
             type: 'separator'
         },

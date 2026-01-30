@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="leftSidebar sidebar background" id="leftSidebar"><span id="weekEN" class="t">Load</span><div class="corner options notIgnoreClick" id="weekCH">ing</div></div>
-    <div class="rightSidebar sidebar background" id="rightSidebar"><span id="countdownDays" class="t">000</span><div class="corner">天</div></div>
+    <div class="rightSidebar sidebar background" id="rightSidebar"><div class="corner"><span id="countdownName">学考还有</span></div><span id="countdownDays" class="t">000</span><div class="corner">天</div></div>
   </div>
   <div class="miniCountdown" id="miniCountdown">00:00</div>
 
@@ -43,6 +43,7 @@
   let countdownText = document.getElementById('countdownText')
   let weekEN = document.getElementById('weekEN')
   let weekCH = document.getElementById('weekCH')
+  let countdownName = document.getElementById('countdownName')
   let countdownDays = document.getElementById('countdownDays')
   let miniCountdown = document.getElementById('miniCountdown')
   let rightSidebar = document.getElementById('rightSidebar')
@@ -91,7 +92,14 @@
   function setBackgroundDisplay() {
     let elements = document.getElementsByClassName('background')
     for (element of elements) {
-      element.style.visibility = (scheduleData.currentHighlight.type === 'current' && isClassHidden) ? 'hidden' : 'visible'
+      if(!(element.id==='rightSidebar'))
+      {
+		element.style.visibility = (scheduleData.currentHighlight.type === 'current' && isClassHidden) ? 'hidden' : 'visible'
+	  }
+	  else
+	  {
+		element.style.visibility = 'visible'
+	  }
     }
   }
 
@@ -161,6 +169,8 @@
       rightSidebar.style.display = 'none'
     } else {
       rightSidebar.style.display = 'block'
+      countdownName.innerText = scheduleConfig.countdown_name+'还剩'
+      if (scheduleConfig.countdown_name === 'hidden' ) { countdownName.innerText = '' }
       countdownDays.innerText = Math.ceil(Math.abs(new Date(scheduleConfig.countdown_target) - date) / (1000 * 60 * 60 * 24))
     }
     leftSidebar.style.display = scheduleConfig.week_display ? 'block' : 'none'
