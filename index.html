@@ -22,7 +22,7 @@
       <div class="triangle"></div>
     </div>
     <div class="leftSidebar sidebar background" id="leftSidebar"><span id="weekEN" class="t">Load</span><div class="corner options notIgnoreClick" id="weekCH">ing</div></div>
-    <div class="rightSidebar sidebar background" id="rightSidebar"><span id="countdownDays" class="t">000</span><div class="corner">天</div></div>
+    <div class="rightSidebar sidebar background" id="rightSidebar"><div class="corner"><span id="countdownName">学考还有</span></div><span id="countdownDays" class="t">000</span><div class="corner">天</div></div>
   </div>
 </body>
 <script>
@@ -35,6 +35,7 @@
   let countdownText = document.getElementById('countdownText')
   let weekEN = document.getElementById('weekEN')
   let weekCH = document.getElementById('weekCH')
+  let countdownName = document.getElementById('countdownName')
   let countdownDays = document.getElementById('countdownDays')
   let rightSidebar = document.getElementById('rightSidebar')
   let leftSidebar = document.getElementById('leftSidebar')
@@ -146,6 +147,9 @@
     } else {
       rightSidebar.style.display = 'block'
       countdownDays.innerText = Math.ceil(Math.abs(new Date(countdownTarget) - date) / (1000 * 60 * 60 * 24))
+      countdownName.innerText = scheduleConfig.countdown_name+'还剩'
+      if (scheduleConfig.countdown_name === 'hidden' ) { countdownName.innerText = '' }
+      countdownDays.innerText = Math.ceil(Math.abs(new Date(scheduleConfig.countdown_target) - date) / (1000 * 60 * 60 * 24))
     }
     leftSidebar.style.display = weekDisplay ? 'block' : 'none'
   }

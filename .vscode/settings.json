@@ -1,0 +1,17 @@
+{
+    "editor.codeActionsOnSave": {},
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:ElectronClassSchedule}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    },
+    "cSpell.words": [
+        "Alimama",
+        "JETB",
+        "nwin",
+        "SIMYOU"
+    ]
+}

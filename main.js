@@ -26,7 +26,8 @@ const createWindow = () => {
         height: 200,
         frame: false,
         transparent: true,
-        alwaysOnTop: config.configs().isWindowAlwaysOnTop,
+        //alwaysOnTop: config.configs().isWindowAlwaysOnTop,
+        alwaysOnTop: false,
         minimizable: false,
         maximizable: false,
         autoHideMenuBar: true,
@@ -39,7 +40,10 @@ const createWindow = () => {
         },
     })
     // win.webContents.openDevTools({ mode: 'detach' })
+    //let alwaysOnTop = false,
     win.loadFile('index.html')
+    //store.set('isWindowAlwaysOnTop', e.checked)
+    store.set('isWindowAlwaysOnTop', false)
 }
 function setAutoLaunch(autoLaunch = true) {
     const shortcutName = '电子课表(请勿重命名).lnk'
